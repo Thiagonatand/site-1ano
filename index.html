@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundo Estrelado Animado</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            opacity: 1;
+            filter: drop-shadow(0 0 6px white);
+            animation: twinkle 3s infinite, moveStar linear infinite;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        @keyframes moveStar {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+        .button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(45deg, #ff0077, #5700ff);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+        }
+        .content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px white;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .image {
+            width: 400px;
+            height: 250px;
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+        .timer-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-shadow: 0 0 10px white;
+        }
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px;
+            text-shadow: 0 0 10px white;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <button class="button" onclick="showContent()">Clique Aqui</button>
+    <div class="content" id="content">
+        <div class="title">Nosso Momento Especial 💖</div>
+        <img src="assents/IMG_20240706_213349_416.jpg" alt="Foto" class="image">
+        <div class="timer-title">Estamos juntos há:</div>
+        <div id="timer" class="timer"></div>
+    </div>
+
+    <!-- Música de fundo -->
+    <audio id="background-music" loop>
+        <source src="assents/Iframe Coldplay - Sparks [Ar48yzjn1PE].mp3" type="audio/mp3">
+        Seu navegador não suporta áudio HTML5.
+    </audio>
+
+    <script>
+        function showContent() {
+            document.querySelector('.button').style.display = 'none';
+            document.getElementById('content').style.display = 'flex';
+            updateTimer();
+            setInterval(updateTimer, 1000);
+            
+            // Tocar música e ajustar volume
+            let music = document.getElementById("background-music");
+            music.volume = 0.2; // Define o volume para 20%
+            music.play();
+        }
+
+        function updateTimer() {
+            const startDate = new Date('2024-03-07T00:00:00');
+            const now = new Date();
+            
+            let diffYears = now.getFullYear() - startDate.getFullYear();
+            let diffMonths = now.getMonth() - startDate.getMonth();
+            let diffDays = now.getDate() - startDate.getDate();
+            let diffHours = now.getHours() - startDate.getHours();
+            let diffMinutes = now.getMinutes() - startDate.getMinutes();
+            let diffSeconds = now.getSeconds() - startDate.getSeconds();
+
+            if (diffDays < 0) {
+                let lastMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+                diffDays += lastMonth;
+                diffMonths--;
+            }
+
+            if (diffMonths < 0) {
+                diffMonths += 12;
+                diffYears--;
+            }
+
+            document.getElementById('timer').innerHTML = 
+                `${diffYears} anos, ${diffMonths} meses, ${diffDays} dias, ${diffHours}h ${diffMinutes}m ${diffSeconds}s`;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const starsContainer = document.querySelector(".stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.className = "star";
+                star.style.top = Math.random() * 100 + "vh";
+                star.style.left = Math.random() * 100 + "vw";
+                star.style.animationDuration = (Math.random() * 5 + 3) + "s";
+                starsContainer.appendChild(star);
+            }
+        });
+    </script>
+</body>
+</html>
