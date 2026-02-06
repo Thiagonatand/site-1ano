@@ -1,174 +1,243 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fundo Estrelado Animado</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-        .stars {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-        }
-        .star {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
-            opacity: 1;
-            filter: drop-shadow(0 0 6px white);
-            animation: twinkle 3s infinite, moveStar linear infinite;
-        }
-        @keyframes twinkle {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
-        }
-        @keyframes moveStar {
-            from { transform: translateY(0); }
-            to { transform: translateY(100vh); }
-        }
-        .button {
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(45deg, #ff0077, #5700ff);
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            z-index: 1;
-        }
-        .button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
-        }
-        .content {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-            animation: fadeIn 1s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .title {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px white;
-            animation: fadeIn 1s ease-in-out;
-        }
-        .image {
-            width: 400px;
-            height: 250px;
-            border-radius: 20px;
-            margin: 20px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-            animation: fadeIn 1s ease-in-out;
-        }
-        .timer-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
-            text-shadow: 0 0 10px white;
-        }
-        .timer {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 10px;
-            text-shadow: 0 0 10px white;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosso Amor 💖</title>
+
+<style>
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(120deg, #050010, #0b0033, #12004d);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== STARS ===== */
+.stars {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: moveStar linear infinite, twinkle 3s infinite;
+    box-shadow: 0 0 6px white;
+}
+
+@keyframes moveStar {
+    from { transform: translateY(-10vh); }
+    to { transform: translateY(110vh); }
+}
+
+@keyframes twinkle {
+    0%,100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* ===== BUTTON ===== */
+.button {
+    padding: 18px 36px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #ff0077, #7a00ff);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255,0,255,0.6);
+    animation: pulse 2s infinite;
+    z-index: 2;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* ===== CONTENT ===== */
+.content {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    z-index: 2;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.title {
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 0 0 12px white;
+    min-height: 40px;
+}
+
+/* ===== IMAGE ===== */
+.image {
+    width: 360px;
+    max-width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.6);
+    animation: fadeIn 2s ease;
+}
+
+/* ===== TIMER ===== */
+.timer-title {
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+.timer {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ===== EXTRA INFO ===== */
+.extra {
+    margin-top: 10px;
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* ===== HEARTS ===== */
+.heart {
+    position: absolute;
+    font-size: 22px;
+    animation: floatUp 2s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-80px); }
+}
+</style>
 </head>
+
 <body>
-    <div class="stars"></div>
-    <button class="button" onclick="showContent()">Clique Aqui</button>
-    <div class="content" id="content">
-        <div class="title">Eu te amo!!💖</div>
-        <img src="assents/IMG_20240706_213349_416.jpg" alt="Foto" class="image">
-        <div class="timer-title">Estamos juntos há:</div>
-        <div id="timer" class="timer"></div>
+
+<div class="stars"></div>
+
+<button class="button" onclick="showContent()">Clique aqui 💖</button>
+
+<div class="content" id="content">
+    <div class="title" id="typing"></div>
+
+    <img src="assents/IMG_20240706_213349_416.jpg" class="image">
+
+    <div class="timer-title">Estamos juntos há:</div>
+    <div class="timer" id="timer"></div>
+
+    <div class="extra">
+        <p>💑 Dias juntos: <span id="daysTogether"></span></p>
+        <p>📍 Desde 07 de março de 2024</p>
+        <p>❤️ E ainda é só o começo…</p>
     </div>
+</div>
 
-    <!-- Música de fundo -->
-    <audio id="background-music" loop>
-        <source src="assents/Iframe Coldplay - Sparks [Ar48yzjn1PE].mp3" type="audio/mp3">
-        Seu navegador não suporta áudio HTML5.
-    </audio>
+<audio id="music" loop>
+    <source src="assents/Iframe Coldplay - Sparks [Ar48yzjn1PE].mp3" type="audio/mp3">
+</audio>
 
-    <script>
-        function showContent() {
-            document.querySelector('.button').style.display = 'none';
-            document.getElementById('content').style.display = 'flex';
-            updateTimer();
-            setInterval(updateTimer, 1000);
-            
-            // Tocar música e ajustar volume
-            let music = document.getElementById("background-music");
-            music.volume = 0.2; // Define o volume para 20%
-            music.play();
-        }
+<script>
+/* ===== SHOW CONTENT ===== */
+function showContent() {
+    document.querySelector(".button").style.display = "none";
+    document.getElementById("content").style.display = "flex";
+    typeText();
+    updateTimer();
+    setInterval(updateTimer, 1000);
 
-        function updateTimer() {
-            const startDate = new Date('2024-03-07T00:00:00');
-            const now = new Date();
-            
-            let diffYears = now.getFullYear() - startDate.getFullYear();
-            let diffMonths = now.getMonth() - startDate.getMonth();
-            let diffDays = now.getDate() - startDate.getDate();
-            let diffHours = now.getHours() - startDate.getHours();
-            let diffMinutes = now.getMinutes() - startDate.getMinutes();
-            let diffSeconds = now.getSeconds() - startDate.getSeconds();
+    const music = document.getElementById("music");
+    music.volume = 0.2;
+    music.play();
+}
 
-            if (diffDays < 0) {
-                let lastMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
-                diffDays += lastMonth;
-                diffMonths--;
-            }
+/* ===== TYPING EFFECT ===== */
+const text = "Eu te amo mais do que palavras conseguem dizer 💖";
+let index = 0;
 
-            if (diffMonths < 0) {
-                diffMonths += 12;
-                diffYears--;
-            }
+function typeText() {
+    if (index < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeText, 70);
+    }
+}
 
-            document.getElementById('timer').innerHTML = 
-                `${diffYears} anos, ${diffMonths} meses, ${diffDays} dias, ${diffHours}h ${diffMinutes}m ${diffSeconds}s`;
-        }
+/* ===== TIMER ===== */
+function updateTimer() {
+    const startDate = new Date("2024-03-07T00:00:00");
+    const now = new Date();
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const starsContainer = document.querySelector(".stars");
-            for (let i = 0; i < 100; i++) {
-                let star = document.createElement("div");
-                star.className = "star";
-                star.style.top = Math.random() * 100 + "vh";
-                star.style.left = Math.random() * 100 + "vw";
-                star.style.animationDuration = (Math.random() * 5 + 3) + "s";
-                starsContainer.appendChild(star);
-            }
-        });
-    </script>
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    document.getElementById("timer").innerHTML =
+        `${days} dias, ${hours}h ${minutes}m ${seconds}s`;
+
+    document.getElementById("daysTogether").innerText = days;
+}
+
+/* ===== STARS GENERATION ===== */
+const starsContainer = document.querySelector(".stars");
+for (let i = 0; i < 120; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.animationDuration = (Math.random() * 6 + 4) + "s";
+    starsContainer.appendChild(star);
+}
+
+/* ===== HEARTS ON CLICK ===== */
+document.addEventListener("click", (e) => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = e.pageX + "px";
+    heart.style.top = e.pageY + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2000);
+});
+</script>
+
 </body>
 </html>
