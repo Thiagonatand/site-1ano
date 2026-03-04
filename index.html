@@ -1,243 +1,238 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosso Amor 💖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nosso Wrapped 2026</title>
+    <style>
+        :root {
+            --bg-deep: #120a1a;        /* Roxo quase preto */
+            --lilac: #b388ff;          /* Lilás principal */
+            --spotify-green: #1ed760;  /* Verde destaque */
+            --gold: #ffd700;           /* Ouro contraste */
+            --white: #ffffff;
+            --card-bg: rgba(49, 27, 71, 0.7);
+        }
 
-<style>
-/* ===== RESET ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+        body, html {
+            margin: 0; padding: 0; height: 100%; width: 100%;
+            font-family: 'Circular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--white);
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
 
-/* ===== BODY ===== */
-body {
-    height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(120deg, #050010, #0b0033, #12004d);
-    background-size: 400% 400%;
-    animation: gradientMove 15s ease infinite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-}
+        /* --- FUNDO ANIMADO --- */
+        #bgCanvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+        }
 
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        .container {
+            position: relative; z-index: 1; width: 100%; height: 100%;
+            max-width: 450px; /* Proporção de celular */
+        }
 
-/* ===== STARS ===== */
-.stars {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    z-index: 0;
-}
+        /* --- SLIDES --- */
+        .slide {
+            display: none; position: absolute; width: 100%; height: 100%;
+            padding: 30px; box-sizing: border-box;
+            flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
 
-.star {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: moveStar linear infinite, twinkle 3s infinite;
-    box-shadow: 0 0 6px white;
-}
+        .active { display: flex; animation: slideIn 0.8s ease forwards; }
 
-@keyframes moveStar {
-    from { transform: translateY(-10vh); }
-    to { transform: translateY(110vh); }
-}
+        @keyframes slideIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
 
-@keyframes twinkle {
-    0%,100% { opacity: 0.3; }
-    50% { opacity: 1; }
-}
+        /* --- TEXTOS --- */
+        h1 { font-size: 3rem; font-weight: 900; margin: 0; line-height: 1; text-transform: uppercase; }
+        .lilac-text { color: var(--lilac); }
+        .green-text { color: var(--spotify-green); }
+        p { font-size: 1.2rem; margin: 15px 0; opacity: 0.9; }
 
-/* ===== BUTTON ===== */
-.button {
-    padding: 18px 36px;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(45deg, #ff0077, #7a00ff);
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-    box-shadow: 0 0 20px rgba(255,0,255,0.6);
-    animation: pulse 2s infinite;
-    z-index: 2;
-}
+        /* --- MOLDURA DO "VÍDEO" INFINITO --- */
+        .video-loop {
+            width: 100%;
+            aspect-ratio: 1/1; /* Quadrado tipo capa de álbum */
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 4px solid var(--lilac);
+            box-shadow: 0 0 30px rgba(179, 136, 255, 0.4);
+            margin-bottom: 20px;
+        }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-    100% { transform: scale(1); }
-}
+        .video-loop img {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: infiniteFade 16s infinite; /* 4s para cada uma das 4 fotos */
+        }
 
-/* ===== CONTENT ===== */
-.content {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    z-index: 2;
-    animation: fadeIn 1.5s ease forwards;
-}
+        /* Lógica do looping das fotos */
+        .video-loop img:nth-child(1) { animation-delay: 0s; }
+        .video-loop img:nth-child(2) { animation-delay: 4s; }
+        .video-loop img:nth-child(3) { animation-delay: 8s; }
+        .video-loop img:nth-child(4) { animation-delay: 12s; }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        @keyframes infiniteFade {
+            0% { opacity: 0; transform: scale(1); }
+            5% { opacity: 1; }
+            25% { opacity: 1; }
+            30% { opacity: 0; transform: scale(1.1); }
+            100% { opacity: 0; }
+        }
 
-.title {
-    font-size: 32px;
-    font-weight: bold;
-    text-shadow: 0 0 12px white;
-    min-height: 40px;
-}
+        /* --- CONTADOR --- */
+        .counter-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 10px; width: 100%;
+        }
+        .counter-box {
+            background: var(--card-bg);
+            padding: 10px; border-radius: 12px;
+            border: 1px solid rgba(179, 136, 255, 0.2);
+        }
+        .val { display: block; font-size: 1.4rem; font-weight: bold; color: var(--gold); }
+        .lab { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--lilac); }
 
-/* ===== IMAGE ===== */
-.image {
-    width: 360px;
-    max-width: 90%;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255,255,255,0.6);
-    animation: fadeIn 2s ease;
-}
+        /* --- BOTÃO --- */
+        .btn {
+            background: var(--lilac); color: var(--bg-deep);
+            border: none; padding: 18px 45px; border-radius: 50px;
+            font-weight: bold; font-size: 1rem; cursor: pointer;
+            margin-top: 30px; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn:hover { transform: scale(1.05); background: var(--white); }
 
-/* ===== TIMER ===== */
-.timer-title {
-    font-size: 22px;
-    margin-top: 10px;
-}
-
-.timer {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-/* ===== EXTRA INFO ===== */
-.extra {
-    margin-top: 10px;
-    font-size: 18px;
-    opacity: 0.9;
-}
-
-/* ===== HEARTS ===== */
-.heart {
-    position: absolute;
-    font-size: 22px;
-    animation: floatUp 2s ease-out forwards;
-}
-
-@keyframes floatUp {
-    0% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-80px); }
-}
-</style>
+        /* --- FOTO ARTISTA --- */
+        .artist-photo {
+            width: 180px; height: 180px; border-radius: 50%;
+            border: 6px solid var(--gold); object-fit: cover;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="stars"></div>
+    <audio id="musica" loop>
+        <source src="Iframe Coldplay - Sparks [Ar48yzjn1PE].mp3" type="audio/mpeg">
+    </audio>
 
-<button class="button" onclick="showContent()">Clique aqui 💖</button>
+    <canvas id="bgCanvas"></canvas>
 
-<div class="content" id="content">
-    <div class="title" id="typing"></div>
+    <div class="container">
+        <div class="slide active" id="s1">
+            <h1 class="lilac-text">Sua</h1>
+            <h1>Retrospectiva</h1>
+            <p>2 anos de uma história incrível.</p>
+            <button class="btn" onclick="iniciar()">Ver meu presente 💜</button>
+        </div>
 
-    <img src="assents/IMG_20240706_213349_416.jpg" class="image">
+        <div class="slide" id="s2">
+            <p>Você foi o "hit" mais ouvido de todos os tempos.</p>
+            <h1 class="green-text" style="font-size: 4rem;">100%</h1>
+            <p>do meu tempo foi pensando em você.</p>
+            <button class="btn" onclick="ir(3)">E a Artista nº 1?</button>
+        </div>
 
-    <div class="timer-title">Estamos juntos há:</div>
-    <div class="timer" id="timer"></div>
+        <div class="slide" id="s3">
+            <img src="4-ca1125ce.jpg" class="artist-photo" alt="Ela">
+            <h2 class="lilac-text">Minha Artista Favorita</h2>
+            <p>Você passou <span class="green-text">1.051.200</span> minutos no topo das minhas paradas.</p>
+            <button class="btn" onclick="ir(4)">Ver nossa história ✨</button>
+        </div>
 
-    <div class="extra">
-        <p>💑 Dias juntos: <span id="daysTogether"></span></p>
-        <p>📍 Desde 07 de março de 2024</p>
-        <p>❤️ E ainda é só o começo…</p>
+        <div class="slide" id="s4">
+            <div class="video-loop">
+                <img src="1-443a06c6.jpg">
+                <img src="1-ca1125ce.jpg">
+                <img src="2-443a06c6.jpg">
+                <img src="2-ca1125ce.jpg">
+                <img src="3-ca1125ce.jpg">
+            </div>
+            
+            <div class="counter-grid">
+                <div class="counter-box"><span class="val" id="y">0</span><span class="lab">Anos</span></div>
+                <div class="counter-box"><span class="val" id="m">0</span><span class="lab">Meses</span></div>
+                <div class="counter-box"><span class="val" id="d">0</span><span class="lab">Dias</span></div>
+                <div class="counter-box"><span class="val" id="h">0</span><span class="lab">Hrs</span></div>
+                <div class="counter-box"><span class="val" id="min">0</span><span class="lab">Min</span></div>
+                <div class="counter-box"><span class="val" id="sec">0</span><span class="lab">Seg</span></div>
+            </div>
+            
+            <p style="font-size: 0.8rem; margin-top: 15px;">Desde 07/03/2024 • Amo você!</p>
+            <button class="btn" style="padding: 10px 20px; font-size: 0.7rem;" onclick="ir(1)">Recomeçar ↻</button>
+        </div>
     </div>
-</div>
 
-<audio id="music" loop>
-    <source src="assents/Iframe Coldplay - Sparks [Ar48yzjn1PE].mp3" type="audio/mp3">
-</audio>
+    <script>
+        // --- FUNÇÕES DE NAVEGAÇÃO ---
+        function iniciar() {
+            document.getElementById('musica').play();
+            ir(2);
+        }
 
-<script>
-/* ===== SHOW CONTENT ===== */
-function showContent() {
-    document.querySelector(".button").style.display = "none";
-    document.getElementById("content").style.display = "flex";
-    typeText();
-    updateTimer();
-    setInterval(updateTimer, 1000);
+        function ir(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById('s' + n).classList.add('active');
+        }
 
-    const music = document.getElementById("music");
-    music.volume = 0.2;
-    music.play();
-}
+        // --- CONTADOR REALTIME ---
+        const start = new Date('2024-03-07T00:00:00');
+        function update() {
+            const now = new Date();
+            const diff = now - start;
 
-/* ===== TYPING EFFECT ===== */
-const text = "Eu te amo mais do que palavras conseguem dizer 💖";
-let index = 0;
+            let years = now.getFullYear() - start.getFullYear();
+            let months = now.getMonth() - start.getMonth();
+            let days = now.getDate() - start.getDate();
 
-function typeText() {
-    if (index < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(index);
-        index++;
-        setTimeout(typeText, 70);
-    }
-}
+            if (days < 0) { months--; let last = new Date(now.getFullYear(), now.getMonth(), 0); days += last.getDate(); }
+            if (months < 0) { years--; months += 12; }
 
-/* ===== TIMER ===== */
-function updateTimer() {
-    const startDate = new Date("2024-03-07T00:00:00");
-    const now = new Date();
+            document.getElementById('y').innerText = years;
+            document.getElementById('m').innerText = months;
+            document.getElementById('d').innerText = days;
+            document.getElementById('h').innerText = Math.floor((diff / 3600000) % 24);
+            document.getElementById('min').innerText = Math.floor((diff / 60000) % 60);
+            document.getElementById('sec').innerText = Math.floor((diff / 1000) % 60);
+        }
+        setInterval(update, 1000);
 
-    const diff = now - startDate;
+        // --- ANIMAÇÃO DE FUNDO ---
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let parts = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-
-    document.getElementById("timer").innerHTML =
-        `${days} dias, ${hours}h ${minutes}m ${seconds}s`;
-
-    document.getElementById("daysTogether").innerText = days;
-}
-
-/* ===== STARS GENERATION ===== */
-const starsContainer = document.querySelector(".stars");
-for (let i = 0; i < 120; i++) {
-    const star = document.createElement("div");
-    star.className = "star";
-    star.style.left = Math.random() * 100 + "vw";
-    star.style.top = Math.random() * 100 + "vh";
-    star.style.animationDuration = (Math.random() * 6 + 4) + "s";
-    starsContainer.appendChild(star);
-}
-
-/* ===== HEARTS ON CLICK ===== */
-document.addEventListener("click", (e) => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = e.pageX + "px";
-    heart.style.top = e.pageY + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 2000);
-});
-</script>
-
+        class Part {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.s = Math.random() * 3 + 1;
+                this.v = Math.random() * 0.5 + 0.2;
+                this.c = Math.random() > 0.5 ? '#b388ff' : '#ffd700';
+            }
+            draw() {
+                this.y += this.v;
+                if (this.y > canvas.height) this.y = -10;
+                ctx.fillStyle = this.c;
+                ctx.globalAlpha = 0.4;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI*2); ctx.fill();
+            }
+        }
+        for(let i=0; i<50; i++) parts.push(new Part());
+        function loop() { ctx.clearRect(0,0,canvas.width,canvas.height); parts.forEach(p => p.draw()); requestAnimationFrame(loop); }
+        loop();
+    </script>
 </body>
 </html>
